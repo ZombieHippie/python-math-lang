@@ -10,13 +10,22 @@ This project can be developed with a TDD attitude, by simply running the test sc
 
 These tests need to pass, then we will string them together to complete the application.
 
+### Developing the Tokenizer
+
+While in the project folder.
+
+Run the following command to run the `arithmetic_tokenizer.py` tests.
+```sh
+python test_tokenizer.py
+```
+
 ### Developing the Parser
 
 While in the project folder.
 
 Run the following command to run the `arithmetic_parser.py` tests.
 ```sh
-python test_evaluator.py
+python test_parser.py
 ```
 
 ### Developing the Evaluator
@@ -25,7 +34,7 @@ While in the project folder.
 
 Run the following command to run the `arithmetic_evaluator.py` tests.
 ```sh
-python test_parser.py
+python test_evaluator.py
 ```
 
 ## References

@@ -1,0 +1,5 @@
+
+MULTIPLY = '*'
+DIVIDE = '/'
+SUBTRACT = '-'
+ADD = '+'

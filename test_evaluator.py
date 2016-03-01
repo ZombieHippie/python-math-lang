@@ -1,4 +1,5 @@
 from arithmetic_evaluator import evaluate
+from operators import *
 import tests
 import unittest
 
@@ -11,7 +12,7 @@ class Test_Evaluator(unittest.TestCase):
 				val = evaluate(test['ast'])
 				self.assertEqual(val, test['eval'], message)
 				if(val == test['eval']):
-					print(" Evaluator Success: " + str(test['ast']) + " ==> OK")
+					print(" Evaluator Success: " + str(test['ast']) + " ==> OK\n")
 
 if __name__ == '__main__':
     unittest.main(verbosity=2, failfast=True)
