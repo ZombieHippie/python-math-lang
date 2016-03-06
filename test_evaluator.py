@@ -8,7 +8,7 @@ class Test_Evaluator(unittest.TestCase):
 		print()
 		for test in tests.tests:
 			with self.subTest(ast=str(test['ast']), source=str(test['source'])):
-				message = "\n  " + str(test['ast']) + " evaluated incorrect value."
+				message = "\n  " + str(test['ast']) + " evaluated incorrect value: " + str(evaluate(test['ast']))
 				val = evaluate(test['ast'])
 				self.assertEqual(val, test['eval'], message)
 				if(val == test['eval']):
