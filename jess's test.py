@@ -3,30 +3,8 @@ from operators import *
 
 # Testing github comprehension
 # Takes a source string and returns a parse tree
-ast = input('Enter your equation: ')
+ast = { 'operator': MULTIPLY, 'L': { 'operator': ADD, 'R': 3, 'L': 2 }, 'R': { 'operator': ADD, 'L': 4, 'R': 5 } }
 
-def evaluate(ast):
-        if (ast == {
-                        'operator': MULTIPLY,
-                        'L': 4,
-                        'R': {
-                                'operator': ADD,
-                                'L': 5,
-                                'R': 1
-                        }
-                }):
-                # return hardcoded answer to first test
-                return 21
-        elif (ast == {
-                        'operator': SUBTRACT,
-                        'L': { 'operator': SUBTRACT, 'L': 90, 'R': -1 },
-                        'R': 5
-                }):
-                # return hardcoded answer to first test
-                return 86
-        else:
-                # demonstration code
-                recursive(ast);
 
 def recursive(ast, L, R):
 
@@ -99,7 +77,9 @@ def recursive(ast, L, R):
 
         else:
                 raise TypeError()
+                
 
+recursive(ast, ast['L'], ast['R'])
 
 
 
