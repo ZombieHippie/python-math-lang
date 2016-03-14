@@ -1,4 +1,3 @@
-# Test comment
 from arithmetic_tokenizer import tokenize
 import tests
 import unittest
@@ -14,4 +13,4 @@ class Test_Tokenizer(unittest.TestCase):
 				print(" Tokenizer Success: " + str(test['source']) + " ==> OK\n")
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2, failfast=True)
+    unittest.main()
