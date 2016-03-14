@@ -35,7 +35,7 @@ class ASTNode:
 			return False
 
 def calcResRecursive(node):
-	if (isinstance(node, int)):
+	if (isinstance(node, int) or isinstance(node, float)):
 		return node
 	else:
 		tempres = {}

@@ -1,5 +1,22 @@
 # python-arithmetic-language
 
+IMPORTANT: You can view this file and the files of this repository at https://github.com/ZombieHippie/python-arithmetic-language
+
+## Demonstration of code
+
+Run the command
+```
+python run.py
+```
+
+## Grammar rules
+
+Please refer to the `Grammar rules.txt` file for grammar rules
+
+## Contributions
+
+Refer to this git repository for how each member contributed.
+
 ## Development getting started
 
  1. Install Python 3.x (default settings worked for me)
