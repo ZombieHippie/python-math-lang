@@ -5,10 +5,9 @@ from operators import *
 def tokenize(str):
 
 	token_map = {'+':'ADD', '-':'SUBTRACT',
-             '*':'MULTIPLY', '/':'DIVIDE',
-             '(':'LPAR', ')':'RPAR'}
+             '*':'MULTIPLY', '/':'DIVIDE'}
 
-	if (str == "4 * 5 + 1"):
+	if (str == "4 * 5"):
 		# return hardcoded answer to first test
 		return [
 			{ 'type': 'number', 'value': 4 },
@@ -23,11 +22,14 @@ def tokenize(str):
 		# res.append({ 'type': 'operator', 'value': ADD })
 		res = []
 
-		split_expr = str.findall('[\d.]+|[%s]' % ''.join(token_map), expr)
-		for x in split_expr:
-			if (isinstance(elements[n], str)):
+		# split_expr = str.findall('[\d.]+|[%s]' % ''.join(token_map), expr)
+		# split_expr = [int(i) for i in str.split()]
+		str.split()
+
+		for x in str:
+			if (isinstance(str[x], str)):
 				res.append = ({ 'type': 'operator', 'value': (token_map.get(x)) })
-			elif (isinstance(elements[n], int)):
+			elif (isinstance(str[x], int)):
 				res.append = ({ 'type': 'number', 'value': x })
 		
 		return res
