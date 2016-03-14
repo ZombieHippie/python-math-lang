@@ -9,7 +9,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4, width=1)
 
 re_ops = '([\+\-\/\*])'
-re_num = '(\d+(\.\d+)?)'
+re_num = '(-?\d+(\.\d+)?)'
 valid_input_re = re.compile('^((' + re_num + '|' + re_ops + ')( |$))+$')
 
 debug = True
