@@ -17,15 +17,14 @@ def tokenize(expr):
 			{ 'type': 'number', 'value': 1 }
 		]
 	else:
-		# demonstration code
-		# res.append({ 'type': 'number', 'value': 3 })
-		# res.append({ 'type': 'operator', 'value': ADD })
 		res = []
 
-		# split_expr = str.findall('[\d.]+|[%s]' % ''.join(token_map), expr)
-		# split_expr = [int(i) for i in str.split()]
 		split_expr = expr.split()
-		mynewlist = [s for s in split_expr if s.isdigit()]
+
+		for x in split_expr:
+			if x.isdigit():
+				split_expr[x] = int(x)
+		#mynewlist = [s for s in split_expr if s.isdigit()]
 
 		for x in split_expr:
 			if (isinstance(split_expr[x], str)):
