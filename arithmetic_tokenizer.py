@@ -4,8 +4,8 @@ from operators import *
 # Takes a source string and returns an array of tokens
 def tokenize(expr):
 
-	token_map = {'+':'ADD', '-':'SUBTRACT',
-             '*':'MULTIPLY', '/':'DIVIDE'}
+	token_map = {'+':ADD, '-':SUBTRACT,
+             '*':MULTIPLY, '/':DIVIDE}
 
 	if (expr == "4 * 5"):
 		# return hardcoded answer to first test
@@ -24,7 +24,8 @@ def tokenize(expr):
 
 		# split_expr = str.findall('[\d.]+|[%s]' % ''.join(token_map), expr)
 		# split_expr = [int(i) for i in str.split()]
-		split_expr = expr.split() 
+		split_expr = expr.split()
+		mynewlist = [s for s in split_expr if s.isdigit()]
 
 		for x in split_expr:
 			if (isinstance(split_expr[x], str)):
