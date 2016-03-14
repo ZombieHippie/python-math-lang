@@ -2,35 +2,26 @@
 from operators import *
 
 # Takes a source string and returns an array of tokens
+token_map = {
+	'+': ADD,
+	'-': SUBTRACT,
+	'*': MULTIPLY,
+	'/': DIVIDE
+}
+
 def tokenize(expr):
 
-	token_map = {'+':ADD, '-':SUBTRACT,
-             '*':MULTIPLY, '/':DIVIDE}
-
-	if (expr == "4 * 5"):
-		# return hardcoded answer to first test
-		return [
-			{ 'type': 'number', 'value': 4 },
-			{ 'type': 'operator', 'value': MULTIPLY },
-			{ 'type': 'number', 'value': 5 },
-			{ 'type': 'operator', 'value': ADD },
-			{ 'type': 'number', 'value': 1 }
-		]
-	else:
 		res = []
 
 		split_expr = expr.split()
 
-		for x in split_expr:
-			if x.isdigit():
-				split_expr[x] = int(x)
-		#mynewlist = [s for s in split_expr if s.isdigit()]
-
-		for x in split_expr:
-			if (isinstance(split_expr[x], str)):
-				res.append = ({ 'type': 'operator', 'value': (token_map.get(x)) })
-			elif (isinstance(split_expr[x], int)):
-				res.append = ({ 'type': 'number', 'value': x })
+		for string_expr in split_expr:
+			try:
+				num = float(string_expr)
+				res.append({ 'type': 'number', 'value': num })
+				
+			except:
+				res.append({ 'type': 'operator', 'value': token_map[string_expr] })
 		
 		return res
 
