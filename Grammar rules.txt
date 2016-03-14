@@ -1,0 +1,18 @@
+Grammar rules:
+
+exp -> exp - term | term
+term -> term + factor | factor
+factor -> factor / number | number
+number -> number * digit | digit
+digit -> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+4*5+3
+
+exp -> term -> term + factor
+			-> factor + factor
+			-> number + factor
+			-> number * digit + factor
+			-> digit * digit + factor
+			-> 4 * 5 + number
+			-> 4 * 5 + digit
+			-> 4 * 5 + 3
