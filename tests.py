@@ -11,9 +11,9 @@ tests = [
 			{ 'type': 'number', 'value': 1 }
 		],
 		'ast': {
-			'operator': MULTIPLY,
-			'L': 4,
-			'R': { 'operator': ADD, 'L': 5, 'R': 1 }
+			'operator': ADD,
+			'L': { 'operator': MULTIPLY, 'L': 4, 'R': 5 },
+			'R': 1
 		},
 		'eval': 21
 	},

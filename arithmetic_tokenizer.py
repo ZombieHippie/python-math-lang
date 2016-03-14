@@ -23,7 +23,7 @@ def tokenize(expr):
 
 		for x in split_expr:
 			if x.isdigit():
-				split_expr[x] = int(x)
+				split_expr[x] = int(split_expr[x])
 		#mynewlist = [s for s in split_expr if s.isdigit()]
 
 		for x in split_expr:
@@ -33,3 +33,4 @@ def tokenize(expr):
 				res.append = ({ 'type': 'number', 'value': x })
 		
 		return res
+
