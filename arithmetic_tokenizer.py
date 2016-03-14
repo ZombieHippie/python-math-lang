@@ -9,11 +9,14 @@ token_map = {
 	'/': DIVIDE
 }
 
-def tokenize(expr):
+def tokenize(expr, debug=False):
 
 		res = []
 
 		split_expr = expr.split()
+
+		if debug:
+			print("Tokenize split:", split_expr)
 
 		for string_expr in split_expr:
 			try:
@@ -22,6 +25,6 @@ def tokenize(expr):
 				
 			except:
 				res.append({ 'type': 'operator', 'value': token_map[string_expr] })
-		
+
 		return res
 

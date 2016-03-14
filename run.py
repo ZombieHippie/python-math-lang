@@ -12,6 +12,8 @@ re_ops = '([\+\-\/\*])'
 re_num = '(\d+(\.\d+)?)'
 valid_input_re = re.compile('^((' + re_num + '|' + re_ops + ')( |$))+$')
 
+debug = True
+
 def run():
 	print('')
 	try:
@@ -19,17 +21,22 @@ def run():
 		is_source_valid = valid_input_re.match(source)
 		is_valid_matched = is_source_valid != None
 		if not is_valid_matched:
-			print("Source string was invalid, please input an expression that is numbers and operators separated by single spaces")
+			if source == "debug":
+				global debug
+				debug = not debug
+				print("DEBUG:", "ON" if debug else "OFF")
+			else:
+				print("Source string was invalid, please input an expression that is numbers and operators separated by single spaces")
 			return run()
 	except:
 		print("Error reading input")
 		return
 	
 	print("TOKENS (arithmetic_tokenizer.py)")
-	tokens = tokenize(source)
+	tokens = tokenize(source, debug)
 	pp.pprint(tokens)
 	print("TREE (Abstract Syntax Tree) (arithmetic_parser.py)")
-	tree = parse(tokens)
+	tree = parse(tokens, debug)
 	pp.pprint(tree)
 
 	if tree is False:
@@ -37,10 +44,11 @@ def run():
 		return run()
 
 	print("VALUE (arithmetic_evaluator.py)")
-	value = evaluate(tree)
+	value = evaluate(tree, debug)
 
 	print(value)
 	run()
 
-print("Use CTRL+C to exit") 
+print("Enter `debug` to toggle debugging. Use CTRL+C to exit.")
+print("DEBUG:", "ON" if debug else "OFF") 
 run()

@@ -4,11 +4,14 @@ from operators import *
 # Testing github comprehension
 # Takes a source string and returns a parse tree
 
-def evaluate(ast):
+def evaluate(ast, debug=False):
         # demonstration code
-        return recursive(ast);
+        if debug:
+                print('DEBUG: Evaluator Operations:')
 
-def recursive(ast):
+        return recursive(ast, debug);
+
+def recursive(ast, debug):
 
         if (type(ast) is float):
                 return ast
@@ -18,22 +21,26 @@ def recursive(ast):
                 
         elif (type(ast) is dict):
                 operator = ast['operator']
-                left = recursive(ast['L'])
-                right = recursive(ast['R'])
-                print(ast)
+                left = recursive(ast['L'], debug)
+                right = recursive(ast['R'], debug)
                 
                 #When left half of operation is dictionary:
                 # Delve into left side, preserve original right side
                 if operator == ADD:
-                        return left + right
+                        res = left + right
                 elif operator == SUBTRACT:
-                        return left - right
+                        res = left - right
                 elif operator == MULTIPLY:
-                        return left * right
+                        res = left * right
                 elif operator == DIVIDE:
-                        return left / right
+                        res = left / right
                 else:
                         raise TypeError()
+
+                if debug:
+                        print('\t', left, operator, right, ' = ', res)
+
+                return res
 
         else:
                 raise TypeError()

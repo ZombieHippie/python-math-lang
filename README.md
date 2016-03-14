@@ -54,6 +54,12 @@ Run the following command to run the `arithmetic_evaluator.py` tests.
 python test_evaluator.py
 ```
 
+### Overall testing
+
+While in the project folder.
+
+Run all tests with `test.cmd`.
+
 ## References
 
 Throughout development the following posts may have been referenced for development.
