@@ -8,12 +8,18 @@ class ASTNode:
 		self.right = None
 		self.parent = None
 	
+	def genResult(self):
+		root = self
+		while(root.parent != None):
+			root = root.parent
+		return calcResult(root)
+		
 	def __str__(self):
 		root = self
 		while(root.parent != None):
 			root = root.parent
-		inOrder(root)
-		return ""
+		traverse(root)
+		return ''
 	
 	def setNode(self, pos, nodeOrValue):
 		if (pos == 1):
@@ -27,17 +33,38 @@ class ASTNode:
 			return True
 		else:
 			return False
-	
-def inOrder(node):
-	if (node == None):
-		return ''
-	elif(isinstance(node, int)):
-		print(node)
-		return ''
+
+def calcResRecursive(node):
+	if (isinstance(node, int)):
+		return node
 	else:
-		inOrder(node.left)
-		print(node.value)
-		inOrder(node.right)
+		tempres = {}
+		tempres['operator'] = node.value
+		tempres['L'] = calcResRecursive(node.left)
+		tempres['R'] = calcResRecursive(node.right)
+		return tempres
+	
+def calcResult(rootnode):
+	result = {}
+	result['operator'] = rootnode.value
+	result['L'] = calcResRecursive(rootnode.left)
+	result['R'] = calcResRecursive(rootnode.right)
+
+	return result
+			
+def traverse(rootnode):
+	queue = [rootnode]
+	while (len(queue) != 0):
+		nextlevel = []
+		for node in queue:
+			if not(isinstance(node, int)):
+				print(node.value, end='')
+				nextlevel.append(node.left)
+				nextlevel.append(node.right)
+			else:
+				print(node, end='')
+		print()
+		queue = nextlevel
 
 def checkPrec(current, prev):
 	precOrder = {SUBTRACT: 0, ADD: 1, DIVIDE: 2, MULTIPLY: 3}
@@ -63,7 +90,8 @@ def makeOperatorNode(currentValue, prevNode, numberStack):
 	return newNode
 	
 # Takes a source string and returns a parse tree
-def parse(tokens, debug):
+def parse(tokens): #add debug to tests
+	debug = False
 	numberStack = []
 	operatorStack = []
 	for token in tokens:
@@ -74,12 +102,16 @@ def parse(tokens, debug):
 		
 	oppSize = len(operatorStack)
 	numSize = len(numberStack)
-	print(operatorStack)
-	print(numberStack)
 		
 	#Sanity check for invalid syntax
-	if (oppSize < 1 or numSize < 2 or oppSize != (numSize - 1)):
+	if (oppSize != (numSize - 1)):
 		return False
+	if (oppSize == 0):
+		result = numberStack.pop(0)
+		if (debug):
+			print(result)
+		#print (result) #remove this line
+		return result
 		
 	res = ASTNode(operatorStack.pop(0))
 	res.setNode(2, numberStack.pop(0))
@@ -91,24 +123,72 @@ def parse(tokens, debug):
 	res = prevNode
 	if (debug):
 		print(res)
-	return res
-
-tokens = [
+	result = res.genResult()
+	#print (result)
+	return result
+'''
+token1 = [
 			{ 'type': 'number', 'value': 4 },
 			{ 'type': 'operator', 'value': MULTIPLY },
 			{ 'type': 'number', 'value': 5 },
 			{ 'type': 'operator', 'value': ADD },
 			{ 'type': 'number', 'value': 1 }
 		]
-tokens1 =	[
-			{ 'type': 'number', 'value': 4 },
+
+token2 = [
+			{ 'type': 'number', 'value': 90 },
+			{ 'type': 'operator', 'value': SUBTRACT },
+			{ 'type': 'number', 'value': -1 },
+			{ 'type': 'operator', 'value': SUBTRACT },
+			{ 'type': 'number', 'value': 5 }
+		]
+		
+token3 = [
+			{ 'type': 'number', 'value': 90 },
+			{ 'type': 'operator', 'value': MULTIPLY },
+			{ 'type': 'number', 'value': -1 },
+			{ 'type': 'operator', 'value': MULTIPLY },
+			{ 'type': 'number', 'value': 5 }
+		]
+		
+token4 = [
+			{ 'type': 'number', 'value': 90 },
 			{ 'type': 'operator', 'value': DIVIDE },
-			{ 'type': 'number', 'value': 2 },
-			{ 'type': 'operator', 'value': SUBTRACT},
-			{ 'type': 'number', 'value': 3 },
-			{ 'type': 'operator', 'value': ADD},
-			{ 'type': 'number', 'value': 4 },
-			{ 'type': 'operator', 'value': MULTIPLY},
-			{ 'type': 'number', 'value': 2},
-			]
-parse(tokens1, True)
+			{ 'type': 'number', 'value': 1 },
+			{ 'type': 'operator', 'value': DIVIDE },
+			{ 'type': 'number', 'value': 5 }
+		]
+		
+token5 = [
+			{ 'type': 'number', 'value': 1 },
+			{ 'type': 'operator', 'value': DIVIDE },
+			{ 'type': 'number', 'value': 5 },
+			{ 'type': 'operator', 'value': SUBTRACT },
+			{ 'type': 'number', 'value': 90 }
+		]
+		
+token6 = [
+			{ 'type': 'number', 'value': 90 },
+			{ 'type': 'operator', 'value': SUBTRACT },
+			{ 'type': 'number', 'value': 1 },
+			{ 'type': 'operator', 'value': DIVIDE },
+			{ 'type': 'number', 'value': 5 }
+		]
+		
+token7 = [
+			{ 'type': 'number', 'value': 905 }
+		]
+		
+token8 = [
+			{ 'type': 'number', 'value': -49 }
+		]
+		
+parse(token1)
+parse(token2)
+parse(token3)
+parse(token4)
+parse(token5)
+parse(token6)
+parse(token7)
+parse(token8)
+'''
